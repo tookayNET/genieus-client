@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import { Box, Flex, Text, Checkbox, Button } from '@chakra-ui/react'
+import { Box, Flex, Text, Checkbox, Button, Link } from '@chakra-ui/react'
 import Split from 'react-split'
 
-const ButtonBar = ({ getHRData }: any) => {
-  const [loadingBtn, setloadingBtn] = useState(false)
+const ButtonBar = ({
+  getHRData,
+  loadingBtn,
+  setloadingBtn,
+  settutorComplete,
+}: any) => {
   return (
     <Flex
       px="10"
@@ -12,43 +16,35 @@ const ButtonBar = ({ getHRData }: any) => {
       justifyContent="space-around"
     >
       <Flex>
-        <Checkbox
-          size="lg"
-          colorScheme="indigo"
-          pr={5}
-          defaultIsChecked
-        ></Checkbox>
+        <Checkbox size="lg" colorScheme="indigo" pr={5}></Checkbox>
 
-        <Text fontFamily="sans-serif" letterSpacing={2} lineHeight={10}>
-          Click here to wait for your favorite <br /> Expect a longer wait
-          time...
+        <Text fontFamily="sans-serif" letterSpacing={2} lineHeight={7}>
+          Click here to wait for your favourites <br />{' '}
+          <Text letterSpacing={1} fontSize={15} opacity={0.5}>
+            Expect a longer wait time...{' '}
+          </Text>
         </Text>
       </Flex>
 
-      {/* <Button
-      
-        loadingText="Finding Tutor"
-        onClick={getHRData}
-        ml={105}
-        letterSpacing={2}
-        colorScheme="indigo"
-        variant="outline"
-        padding={8}
-      >
-        Submit Request
-      </Button> */}
-
       {!loadingBtn === true ? (
-        <Button
-          onClick={() => setloadingBtn(true)}
-          ml={105}
-          letterSpacing={2}
-          colorScheme="indigo"
-          variant="outline"
-          padding={8}
-        >
-          Submit
-        </Button>
+        <Link href="#link-header">
+          <Button
+            onClick={() => {
+              setTimeout(() => {
+                settutorComplete(true)
+                setloadingBtn(false)
+              }, 3000)
+              setloadingBtn(true)
+            }}
+            ml={105}
+            letterSpacing={2}
+            colorScheme="indigo"
+            variant="outline"
+            padding={8}
+          >
+            Submit
+          </Button>
+        </Link>
       ) : (
         <Flex justifyContent="center" alignItems="center" direction="column">
           <Button

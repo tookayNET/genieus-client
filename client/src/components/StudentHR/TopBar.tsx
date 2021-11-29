@@ -2,6 +2,7 @@ import React from 'react'
 import { Heading, Box, Flex } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 
 const TopBar = () => {
   return (
@@ -26,6 +27,7 @@ const TopBar = () => {
       >
         Your Help Request
       </Heading>
+      <ColorModeSwitcher position="absolute" right={'10'} />
     </Flex>
   )
 }
