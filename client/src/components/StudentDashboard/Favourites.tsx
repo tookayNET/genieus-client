@@ -1,6 +1,14 @@
 import React, { useState } from 'react'
-import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
+import ModalFavourites from './ModalFavourites'
 
 const favArr: any = [
   {
@@ -58,13 +66,15 @@ const colorHeading = 'white'
 const Favourites = () => {
   const [favList, setFavList] = useState(favArr)
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     // TODO: USE https://chakra-ui.com/docs/overlay/drawer FOR REVIEW
 
     <Flex color={colorHeading} flexDirection="column" h="100%" minWidth="350px">
       <Heading as="h1" size="xl" fontWeight="600" pt={'1rem'} pb={'1rem'}>
-        Favourites
+        Favourite Tutors
       </Heading>
       <Box
         overflowY={'auto'}
@@ -84,37 +94,42 @@ const Favourites = () => {
         {favList.map((el: any) => {
           return (
             <Box key={el.dur}>
-              <Flex
+              {/* TODO: CHANGE TO BUTTON OR ADD VIEW/REMOVE BUTTON AND CARRY FORWARD DETAILS */}
+              <Flex onClick={ onOpen }
+                bg={colorBgFav}
+                border="solid"
+                borderRadius={'1rem'}
                 flexDirection="row"
                 justify="flex-start"
-                bg={colorBgFav}
-                w="95%"
                 p="15px"
                 mb="2rem"
-                borderRadius={'1rem'}
-                border="solid"
+                w="95%"
               >
                 <Flex flexDirection="column" justify="space-between">
                   <Image
-                    src="https://bit.ly/dan-abramov"
-                    boxSize="5rem"
                     borderRadius="1rem"
+                    boxSize="5rem"
                     minWidth="5rem"
+                    src="https://bit.ly/dan-abramov"
                   />
                   <Box position="relative">
                     {el.online === 0 ? (
-                      <Text color="green.500" as={MdCheckCircle} />
+                      <Text color="green.500" as={MdCheckCircle} size="large" />
                     ) : (
-                      <Text color="green.500" as={MdRemoveCircleOutline} />
+                      <Text
+                        color="green.500"
+                        as={MdRemoveCircleOutline}
+                        size="large"
+                      />
                     )}
                   </Box>
                 </Flex>
                 <Flex
+                  align="flex-start"
+                  color={colorTextFav}
                   flexDirection="column"
                   justify="flex-start"
-                  align="flex-start"
                   ml="20px"
-                  color={colorTextFav}
                 >
                   <Heading color={colorNameFav}>{el.tutor}</Heading>
                   <Text>Experience</Text>
@@ -130,6 +145,7 @@ const Favourites = () => {
           )
         })}
       </Box>
+      <ModalFavourites isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }

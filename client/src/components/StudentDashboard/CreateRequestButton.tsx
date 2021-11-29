@@ -1,14 +1,15 @@
 import React from 'react'
-import { Button, Flex } from '@chakra-ui/react'
+import { Button, Flex, useDisclosure } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
 const buttonColorPurple = '#A78BFA'
 
-
 // TODO: NOT SURE THIS IS THE TEXTBOOK IMPLEMENTATION OF REACT ROUTING
 const CreateRequestButton = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   const navigate = useNavigate()
-  
+
   const handleClick = () => {
     console.log('Create request clicked - not yet implemented')
     navigate('/student-hr')

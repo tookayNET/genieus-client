@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import { Box, Flex, Heading, IconButton, Image, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, IconButton, Image, Text, useDisclosure } from '@chakra-ui/react'
 
 import { SettingsIcon } from '@chakra-ui/icons'
+import ModalEditProfile from './ModalEditProfile'
 
 // TODO: DUMMY OBJECT - PULL FROM DATABASE
 const userDetailsObj: any = {
@@ -22,6 +23,7 @@ function tierIcon(tier: string) {
 }
 
 const CornerProfile = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [userDetails, setUserDetails] = useState(userDetailsObj)
   
@@ -37,12 +39,13 @@ const CornerProfile = () => {
 
         <IconButton
           // TODO: ICON IS TOO DARK IN DARK MODE
-          colorScheme="white"
           aria-label="Edit Profile"
+          colorScheme="white"
+          height="20px"
           icon={<SettingsIcon />}
           size="small"
-          h="20px"
-          w="20px"
+          onClick={onOpen}
+          width="20px"
         />
       </Flex>
       <Box position="relative">
@@ -52,6 +55,7 @@ const CornerProfile = () => {
           src={userDetails.avatar}
         />
       </Box>
+      <ModalEditProfile isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }
