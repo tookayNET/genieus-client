@@ -17,7 +17,8 @@ const TopBar = () => {
       </Box>
       <Heading
         fontFamily="sans-serif"
-        fontWeight={350}
+        fontWeight={300}
+        color="indigo.300"
         letterSpacing={3.5}
         pt={8}
         as="h2"
