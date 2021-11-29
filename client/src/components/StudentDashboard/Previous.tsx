@@ -4,12 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 const prevArr: any = [
-  { issue: '0react router', duration: 21, tutor: 'vic', rating: 4, key: 0 },
-  { issue: '1react router', duration: 22, tutor: 'vic', rating: 4, key: 1 },
-  { issue: '2react router', duration: 23, tutor: 'vic', rating: 4, key: 2 },
-  { issue: '3react router', duration: 24, tutor: 'vic', rating: 4, key: 3 },
-  { issue: '4react router', duration: 25, tutor: 'vic', rating: 5, key: 4 },
+  { issue: 'React router', duration: 21, tutor: 'Vic', rating: 4, key: 0 },
+  { issue: 'Python', duration: 22, tutor: 'Charlie', rating: 4, key: 1 },
+  { issue: 'Figma', duration: 23, tutor: 'Tobias', rating: 4, key: 2 },
+  { issue: 'C++', duration: 24, tutor: 'Vic', rating: 4, key: 3 },
+  { issue: 'Fortran', duration: 25, tutor: 'Jess', rating: 5, key: 4 },
 ]
+
+const colorBgPrev: string = "#9CA3AF"
+const colorTextPrev: string = "black"
 
 const Previous = () => {
   return (
@@ -23,7 +26,6 @@ const Previous = () => {
       <Flex
         flexDirection="row"
         justify="flex-start"
-        bg="blue"
         width={'100%'}
         // overflow={"scroll"}
         overflowY={'auto'}
@@ -31,11 +33,11 @@ const Previous = () => {
           '&::-webkit-scrollbar': {
             width: '30px',
             borderRadius: '8px',
-            backgroundColor: `rgba(0, 0, 0, 0.15)`,
+            backgroundColor: `rgba(150, 150, 190, 0.15)`,
           },
           '&::-webkit-scrollbar-thumb': {
             borderRadius: '8px',
-            backgroundColor: `rgba(0, 0, 0, 0.45)`,
+            backgroundColor: `rgba(160, 160, 230, 0.45)`,
           },
         }}
       >
@@ -46,7 +48,8 @@ const Previous = () => {
                 flexDirection="column"
                 mr="1rem"
                 mb="1rem"
-                bg="purple"
+                color={colorTextPrev}
+                bg={colorBgPrev}
                 p={'0.5rem'}
                 borderRadius={'1rem'}
                 border="solid"

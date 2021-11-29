@@ -15,9 +15,6 @@ const mainBoxColor: string = '#374151'
 const lottieFirework: any = require('../../assets/lottie/firework/83980-fireworkc.json')
 
 const Achievements = () => {
-  // TODO: EXPAND LINE SPACING
-  // TODO: FVOURITES
-  // TODO: SHADOW ON CREATE REQUEST BUTTON
 
   return (
     <Flex
@@ -27,26 +24,26 @@ const Achievements = () => {
       borderRadius={'2rem'}
       color={'white'}
       flexDirection="column"
-      h="100%"
-      p={'1rem'}
+      height="100%"
+      padding={'1rem'}
     >
       {/* <VStack> */}
 
-      <Flex flexDirection="row" bg="red" justify={'space-between'}>
+      <Flex flexDirection="row" justify={'space-between'}>
         <Heading as="h1" size="xl" fontWeight="600" zIndex={10}>
           Achievements
         </Heading>
-        <Box position="relative" top={"-10px"} width="70px" h="70px" bg="blue" zIndex="5">
+        <Box position="relative" top={"-10px"} w="70px" h="70px" zIndex="5">
           <Lottie animationData={lottieFirework} style={{ width: '100px' }} />
         </Box>
       </Flex>
 
-      <List spacing={3} position="relative" bg="purple" zIndex={0}>
+      <List spacing={3} position="relative" zIndex={0}>
         <ListItem>
           <ListIcon as={MdCheckCircle} color="green.500"/>completed bio
         </ListItem>
         <ListItem>
-          <ListIcon as={MdCheckCircle} color='green.500'/>completed first request
+          <ListIcon as={MdCheckCircle} color='green.500'/>completed first help request
         </ListItem>
         <ListItem>
           <ListIcon as={MdCheckCircle} color='green.500'/>member for 3 months
