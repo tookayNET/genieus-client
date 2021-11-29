@@ -9,34 +9,43 @@ import {
   Box,
   Checkbox,
   Button,
+  Image,
   GridItem,
   Heading,
   Flex,
   Select,
   HStack,
   Text,
+  useColorModeValue,
   Tag,
   TagLabel,
   Textarea,
 } from '@chakra-ui/react'
 
 const HrContent = ({ settutorComplete }: any) => {
-  const code = `function add(a, b) {
-    return a + b;
+  const imageObj = {
+    js: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
+    python: 'http://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png',
+    cplus:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png',
   }
-  `
+
   const [value, setValue] = useState('')
-  const [codeValue, setcodeValue] = useState(code)
-  const [loading, setloading] = useState(false)
+  const [codeValue, setcodeValue] = useState('')
   const [loadingBtn, setloadingBtn] = useState(false)
+  const [selectValue, setSelectValue] = useState('')
 
   let handleInputChange = (e: any) => {
     let inputValue = e.target.value
     setValue(inputValue)
   }
+  function handleEditorChange(value: any, event: any) {
+    setcodeValue(value)
+  }
 
+  // Form output
   const getHRData = () => {
-    console.log(`${codeValue}, ${value}`)
+    console.log(`${codeValue}, ${value}, ${selectValue}`)
   }
 
   return (
@@ -50,23 +59,27 @@ const HrContent = ({ settutorComplete }: any) => {
           expandToMin={false}
           gutterAlign="center"
           snapOffset={30}
-          dragInterval={1}
           cursor="col-resize"
         >
           <div className="split-one">
             <GridItem id="one">
               <Flex direction="row" justify="space-between" alignItems="center">
-                <Heading fontSize={30} fontWeight={200} as="h5">
+                <Heading
+                  fontSize={30}
+                  fontFamily="montserrat"
+                  fontWeight={300}
+                  as="h5"
+                >
                   Description
                 </Heading>
                 <HStack spacing={5}>
-                  <Tag variant="solid" size="lg" colorScheme="indigo">
+                  <Tag variant="outline" size="lg" colorScheme="indigo">
                     <TagLabel>#redux</TagLabel>
                   </Tag>
-                  <Tag variant="solid" size="lg" colorScheme="indigo">
+                  <Tag variant="outline" size="lg" colorScheme="indigo">
                     <TagLabel>#react</TagLabel>
                   </Tag>
-                  <Tag variant="solid" size="lg" colorScheme="indigo">
+                  <Tag variant="outline" size="lg" colorScheme="indigo">
                     <TagLabel>#javascript</TagLabel>
                   </Tag>
                 </HStack>
@@ -74,6 +87,8 @@ const HrContent = ({ settutorComplete }: any) => {
 
               <Box pt={5}>
                 <Textarea
+                  border="1px solid"
+                  borderColor="indigo.300"
                   onChange={handleInputChange}
                   isRequired
                   value={value}
@@ -92,35 +107,68 @@ const HrContent = ({ settutorComplete }: any) => {
                 direction="row"
                 justifyContent="space-between"
               >
-                <Heading fontSize={30} fontWeight={200} as="h5">
+                <Heading
+                  fontSize={30}
+                  fontFamily="montserrat"
+                  fontWeight={300}
+                  as="h5"
+                >
                   Code Sample
                 </Heading>
-                <Select
-                  colorScheme="indigo"
-                  borderColor="indigo.300"
-                  maxW={'200px'}
-                  variant="outline"
-                  placeholder="Select language"
-                  isRequired
+                <Flex
+                  justifyContent="space-between"
+                  alignItems="center"
+                  direction="row"
                 >
-                  <option value="option1">JavaScript</option>
-                  <option value="option2">Python</option>
-                  <option value="option3">C++</option>
-                </Select>
+                  {selectValue && (
+                    <Image
+                      mr={5}
+                      height="30px"
+                      width="30px"
+                      borderRadius="5"
+                      // @ts-ignore
+                      src={
+                        selectValue === 'javascript'
+                          ? imageObj.js
+                          : selectValue === 'python'
+                          ? imageObj.python
+                          : selectValue === 'cplus'
+                          ? imageObj.cplus
+                          : null
+                      }
+                    />
+                  )}
+                  <Select
+                    onChange={(e) => setSelectValue(e.target.value)}
+                    value={selectValue}
+                    colorScheme="indigo"
+                    borderColor="indigo.300"
+                    maxW={'200px'}
+                    variant="outline"
+                    placeholder="Select language"
+                    isRequired
+                  >
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="cplus">C++</option>
+                  </Select>
+                </Flex>
               </Flex>
               <Box
                 mt={4}
                 border="1px solid"
-                borderColor="gray.600"
+                borderColor="indigo.300"
+                borderRadius="5"
                 minH={'50vh'}
+                overflow="hidden"
               >
                 <Editor
                   height="50vh"
                   defaultLanguage="javascript"
                   defaultValue="// Please describe your problem..."
                   value={codeValue}
-                  onChange={(e: any) => setcodeValue(e.target.value)}
-                  theme="vs-dark"
+                  onChange={handleEditorChange}
+                  theme={useColorModeValue('vs-light', 'vs-dark')}
                 />
               </Box>
             </GridItem>

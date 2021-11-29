@@ -18,33 +18,44 @@ const ButtonBar = ({
       <Flex>
         <Checkbox size="lg" colorScheme="indigo" pr={5}></Checkbox>
 
-        <Text fontFamily="sans-serif" letterSpacing={2} lineHeight={7}>
+        <Text fontFamily="montserrat" letterSpacing={1} lineHeight={7}>
           Click here to wait for your favourites <br />{' '}
-          <Text letterSpacing={1} fontSize={15} opacity={0.5}>
+          <Text
+            letterSpacing={1}
+            fontFamily="montserrat"
+            fontSize={15}
+            opacity={0.5}
+          >
             Expect a longer wait time...{' '}
           </Text>
         </Text>
       </Flex>
 
       {!loadingBtn === true ? (
-        <Link href="#link-header">
-          <Button
-            onClick={() => {
-              setTimeout(() => {
-                settutorComplete(true)
-                setloadingBtn(false)
-              }, 3000)
-              setloadingBtn(true)
-            }}
-            ml={105}
-            letterSpacing={2}
-            colorScheme="indigo"
-            variant="outline"
-            padding={8}
-          >
-            Submit
-          </Button>
-        </Link>
+        <Button
+          onClick={() => {
+            getHRData()
+            setTimeout(() => {
+              settutorComplete(true)
+              setloadingBtn(false)
+
+              window.scrollTo({
+                left: 0,
+                top: document.body.scrollHeight,
+                behavior: 'smooth',
+              })
+            }, 3000)
+            setloadingBtn(true)
+          }}
+          ml={105}
+          letterSpacing={2}
+          colorScheme="indigo"
+          variant="outline"
+          padding={8}
+          fontFamily="montserrat"
+        >
+          Submit
+        </Button>
       ) : (
         <Flex justifyContent="center" alignItems="center" direction="column">
           <Button
@@ -57,11 +68,16 @@ const ButtonBar = ({
             padding={8}
           ></Button>
           <Button
-            onClick={() => setloadingBtn(false)}
+            onClick={() => {
+              setloadingBtn(false)
+              settutorComplete(false)
+              clearTimeout()
+            }}
             letterSpacing={1}
             mr={50}
             _hover={{ bg: 'none', opacity: 0.6 }}
             variant="ghost"
+            fontFamily="montserrat"
           >
             Cancel
           </Button>
@@ -69,7 +85,7 @@ const ButtonBar = ({
       )}
 
       <Box>
-        <Text letterSpacing={1}>
+        <Text fontFamily="montserrat" letterSpacing={0.5}>
           You can continue to update your request after submitting
         </Text>
       </Box>
