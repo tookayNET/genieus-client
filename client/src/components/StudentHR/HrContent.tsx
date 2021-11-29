@@ -35,11 +35,11 @@ const HrContent = ({ settutorComplete }: any) => {
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
 
-  let handleInputChange = (e: any) => {
+  let handleInputChange = (e: any): void => {
     let inputValue = e.target.value
     setValue(inputValue)
   }
-  function handleEditorChange(value: any, event: any) {
+  function handleEditorChange(value: any, event: any): void {
     setcodeValue(value)
   }
 
